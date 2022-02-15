@@ -4,6 +4,7 @@ var util= require('util');
 var encoder = new util.TextEncoder('utf-8');
 const taskrouter=require('./routes/task.js')
 const connectDB =require('./db/connector')
+require('dotenv').config()
 
 app.use(express.json())
 // routes
@@ -17,7 +18,7 @@ const port= 3000
 
 const start= async ()=>{
     try{
-        await connectDB()
+        await connectDB(process.env.MONGO_URI)
         console.log("data base connected successfully")
         app.listen(port, console.log(`server is listening on port${port}`))
     }
