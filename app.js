@@ -4,6 +4,7 @@ var util= require('util');
 var encoder = new util.TextEncoder('utf-8');
 const taskrouter=require('./routes/task.js')
 const connectDB =require('./db/connector')
+const notFound= require('./middleware/not-found')
 require('dotenv').config()
 
 app.use(express.json())
@@ -13,6 +14,7 @@ app.get('/hello',(req,res)=>{
 })
 
 app.use('/api/vi/tasks',taskrouter)
+app.use(notFound)
 
 const port= 3000
 

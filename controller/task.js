@@ -1,8 +1,9 @@
 const Task = require('../models/task')
-const getAllTask = async(req, res) => {
+const asyncWrappr=require('../middleware/async')
+const getAllTask =  async(req, res) => {
     try {
         const tasks = await Task.find({})
-        res.status(200).json({ tasks })
+        res.status(200).json({success:true,data:{ tasks,nbHits:tasks.length} })
         console.log(tasks)
 
     }
@@ -10,6 +11,7 @@ const getAllTask = async(req, res) => {
         res.status(500).json({ msg: err })
     }
 }
+
 
 const createTask = async (req, res) => {
     try {
@@ -78,6 +80,7 @@ const deleteTask = async (req, res) => {
     }
   
 }
+
 
 module.exports = {
     getAllTask, createTask, getTask, updateTask, deleteTask
